@@ -1,0 +1,16 @@
+# Ignore node_modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Ignore environment files
+.env
+client/.env
+server/.env
+
+# OS-specific
+.DS_Store
+
+# Build output
+dist/
+build/
