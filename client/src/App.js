@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const App = () => {
     const [tasks, setTasks] = useState([]);
@@ -9,7 +10,7 @@ const App = () => {
 
     // Fetch tasks from the server
     useEffect(() => {
-        axios.get('https://task-scheduler-backend-4429.onrender.com/api/tasks/all') // Updated URL
+        axios.get('${API_URL}/api/tasks/all') // Updated URL
             .then(response => {
                 console.log('Fetched tasks:', response.data); // Check the data structure
                 setTasks(response.data);
@@ -24,7 +25,7 @@ const App = () => {
             return;
         }
         try {
-            const response = await axios.post('https://task-scheduler-backend-4429.onrender.com/api/tasks/add', { // Updated URL
+            const response = await axios.post('${API_URL}/api/tasks/add', { // Updated URL
                 title, 
                 description,
                 priority, 
@@ -43,7 +44,7 @@ const App = () => {
 
     const deleteTask = async (id) => {
         try {
-            await axios.delete(`https://task-scheduler-backend-4429.onrender.com/api/tasks/${id}`); // Updated URL
+            await axios.delete(`${API_URL}/api/tasks/${id}`); // Updated URL
             setTasks(tasks.filter((task) => task._id !== id));
         } catch (err) {
             console.error('Error deleting task:', err);
