@@ -10,7 +10,7 @@ const App = () => {
 
     // Fetch tasks from the server
     useEffect(() => {
-        axios.get('${API_URL}/api/tasks/all') // Updated URL
+        axios.get(`${API_URL}/api/tasks/all`) // Updated URL
             .then(response => {
                 console.log('Fetched tasks:', response.data); // Check the data structure
                 setTasks(response.data);
@@ -25,7 +25,7 @@ const App = () => {
             return;
         }
         try {
-            const response = await axios.post('${API_URL}/api/tasks/add', { // Updated URL
+            const response = await axios.post(`${API_URL}/api/tasks/add`, { // Updated URL
                 title, 
                 description,
                 priority, 
