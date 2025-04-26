@@ -9,7 +9,7 @@ const App = () => {
 
     // Fetch tasks from the server
     useEffect(() => {
-        axios.get('http://localhost:5000/api/tasks/all')
+        axios.get('https://task-scheduler-backend-4429.onrender.com/api/tasks/all') // Updated URL
             .then(response => {
                 console.log('Fetched tasks:', response.data); // Check the data structure
                 setTasks(response.data);
@@ -17,8 +17,6 @@ const App = () => {
             .catch(error => console.error('Error fetching tasks:', error));
     }, []);
     
-
-
     const addTask = async (e) => {
         e.preventDefault();
         if (!title.trim()) {
@@ -26,7 +24,7 @@ const App = () => {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:5000/api/tasks/add', { 
+            const response = await axios.post('https://task-scheduler-backend-4429.onrender.com/api/tasks/add', { // Updated URL
                 title, 
                 description,
                 priority, 
@@ -42,13 +40,10 @@ const App = () => {
             console.error('Error adding task:', error.response ? error.response.data : error.message);
         }
     };
-    
-    
-    
 
     const deleteTask = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+            await axios.delete(`https://task-scheduler-backend-4429.onrender.com/api/tasks/${id}`); // Updated URL
             setTasks(tasks.filter((task) => task._id !== id));
         } catch (err) {
             console.error('Error deleting task:', err);
@@ -83,15 +78,14 @@ const App = () => {
                 <button onClick={addTask} style={styles.addButton}>Add Task</button>
             </div>
             <div style={styles.taskList}>
-            {tasks.map((task) => (
-    <div key={task._id} style={styles.taskCard(task.priority)}>
-        <h3>{task.title || 'Untitled Task'}</h3>
-        <p>Description: {task.description || 'No Description'}</p>
-        <p>Priority: {task.priority}</p>
-        <button onClick={() => deleteTask(task._id)} style={{ color: 'red' }}>Delete</button>
-    </div>
-))}
-
+                {tasks.map((task) => (
+                    <div key={task._id} style={styles.taskCard(task.priority)}>
+                        <h3>{task.title || 'Untitled Task'}</h3>
+                        <p>Description: {task.description || 'No Description'}</p>
+                        <p>Priority: {task.priority}</p>
+                        <button onClick={() => deleteTask(task._id)} style={{ color: 'red' }}>Delete</button>
+                    </div>
+                ))}
             </div>
         </div>
     );
@@ -146,7 +140,6 @@ const styles = {
         margin: '10px auto',
         textAlign: 'left',
     }),
-      
     deleteButton: {
         marginTop: '10px',
         backgroundColor: '#e74c3c',
